@@ -1,0 +1,37 @@
+
+public class Main {
+// Defining Function
+public static double f(double x) {
+return Math.pow(x, 3) - 4 * x - 9;
+}
+// Implementing Bisection Method
+public static void bisection(double x0, double x1, double e) {
+int step = 1;
+System.out.println("*** BISECTION METHOD IMPLEMENTATION ***");
+boolean condition = true;
+while (condition) {
+double x2 = (x0 + x1) / 2;
+System.out.printf("Iteration-%d, x2 = %.6f and f(x2) = %.6f\n", step, x2, f(x2));
+if (f(x0) * f(x2) < 0) {
+x1 = x2;
+} else {
+x0 = x2;
+}
+step++;
+condition = Math.abs(f(x2))>e ;
+}
+System.out.printf("\nRequired Root is : %.8f\n", (x0 + x1) / 2);
+}
+public static void main(String[] args) {
+double x0 = 2;
+double x1 = 3;
+double e = 0.00001;
+// Checking Correctness of initial guess values and bisecting
+if (f(x0) * f(x1) > 0.0) {
+System.out.println("Given guess values do not bracket the root.");
+System.out.println("Try Again with different guess values.");
+} else {
+bisection(x0, x1, e);
+}
+}
+}
